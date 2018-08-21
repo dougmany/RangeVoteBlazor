@@ -1,6 +1,7 @@
 ﻿@page "/trips"
 @inject HttpClient Http
 
+
 <h1>Trip Vote</h1>
 
 <p>Give your first choice a 9.9 and your lst choice 0.  Score all others as you see fit.</p>
@@ -31,18 +32,14 @@ else
 }
 
 @functions {
-    Trip[] trips;
+    Common.Trip[] trips;
 
     protected override async Task OnInitAsync()
     {
-        trips = await Http.GetJsonAsync<Trip[]>("sample-data/trips.json");
+        trips = await Http.GetJsonAsync<Common.Trip[]>("sample-data/trips.json");
     }
 
-    class Trip
-    {
-        public String Name { get; set; }
-        public Double Score { get; set; }
-    }
+
 
     void IncrementScore(String name)
     {
