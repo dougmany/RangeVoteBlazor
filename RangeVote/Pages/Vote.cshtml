@@ -1,45 +1,45 @@
-﻿@page "/trips"
+﻿@page "/vote"
+@using RangeVote.Common
 @inject HttpClient Http
 
 
 <h1>Trip Vote</h1>
 
-<p>Give your first choice a 9.9 and your lst choice 0.  Score all others as you see fit.</p>
+<p>Give your first choice a 9.9 and your last choice 0.  Score all others as you see fit.</p>
 
 @if (trips == null)
 {
-    <p><em>Loading...</em></p>
+<p><em>Loading...</em></p>
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Score</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var trip in trips.OrderByDescending(t=>t.Score))
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var trip in trips.OrderByDescending(t=>t.Score))
             {
-                <tr>
-                    <td>@trip.Name</td>
-                    <td><button class="btn btn-primary" onclick="@(e => DecrementScore(@trip.Name))">-</button> <button class="btn" onclick="@(e => DecrementScorePt(@trip.Name))">-</button> @trip.Score.ToString("N1") <button class="btn" onclick="@(e => IncrementScorePt(@trip.Name))">+</button> <button class="btn btn-primary" onclick="@(e => IncrementScore(@trip.Name))">+</button></td>
-                </tr>
+        <tr>
+            <td>@trip.Name</td>
+            <td><button class="btn btn-primary" onclick="@(e => DecrementScore(@trip.Name))">-</button> <button class="btn" onclick="@(e => DecrementScorePt(@trip.Name))">-</button> @trip.Score.ToString("N1") <button class="btn" onclick="@(e => IncrementScorePt(@trip.Name))">+</button> <button class="btn btn-primary" onclick="@(e => IncrementScore(@trip.Name))">+</button></td>
+        </tr>
             }
-        </tbody>
-    </table>
+    </tbody>
+</table>
 }
 
 @functions {
-    Common.Trip[] trips;
+    Candidate[] trips;
 
     protected override async Task OnInitAsync()
     {
-        trips = await Http.GetJsonAsync<Common.Trip[]>("sample-data/trips.json");
+        trips = await Http.GetJsonAsync<Candidate[]>("sample-data/trips.json");
+        trips = await Http.GetJsonAsync<Candidate[]>("https://localhost:44373/api/candidate/f2cf5956-4ca0-485e-a7f7-27fa4897a4db");
     }
-
-
 
     void IncrementScore(String name)
     {
@@ -58,9 +58,9 @@ else
         var trip = trips.Where(t => t.Name == name).FirstOrDefault();
         if (trip != null)
         {
-            if (trip.Score < 9)
+            if (trip.Score < 9.8)
             {
-                trip.Score+= .1;
+                trip.Score += .1;
             }
         }
     }
