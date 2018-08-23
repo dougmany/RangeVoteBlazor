@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RangeVote.API.Data;
+using RangeVote.Server.Data;
 using RangeVote.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RangeVote.API.Controllers
+namespace RangeVote.Server.Controllers
 {
 
 
@@ -23,9 +23,9 @@ namespace RangeVote.API.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public IEnumerable<Candidate> Get(Guid id)
+        public Candidate[] Get(Guid id)
         {
-            return _repository.GetCandidate(id);
+            return _repository.GetCandidate(id).ToArray();
         }
 
         // PUT api/values/5

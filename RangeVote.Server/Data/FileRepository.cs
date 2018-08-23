@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RangeVote.Common;
 
-namespace RangeVote.API.Data
+namespace RangeVote.Server.Data
 {
     public class FileRepository : IRepository
     {

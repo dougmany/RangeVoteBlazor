@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Blazor.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace RangeVote
+namespace RangeVote.Client
 {
     public class Startup
     {

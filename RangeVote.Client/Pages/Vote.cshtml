@@ -6,6 +6,7 @@
 <h1>Trip Vote</h1>
 
 <p>Give your first choice a 9.9 and your last choice 0.  Score all others as you see fit.</p>
+<p>@message</p>
 
 @if (trips == null)
 {
@@ -34,11 +35,14 @@ else
 
 @functions {
     Candidate[] trips;
+    String message;
 
     protected override async Task OnInitAsync()
     {
-        trips = await Http.GetJsonAsync<Candidate[]>("sample-data/trips.json");
-        trips = await Http.GetJsonAsync<Candidate[]>("https://localhost:44373/api/candidate/f2cf5956-4ca0-485e-a7f7-27fa4897a4db");
+        //trips = await Http.GetJsonAsync<Candidate[]>("sample-data/trips.json");
+        message = "About to get data";
+        trips = await Http.GetJsonAsync<Candidate[]>("/api/candidate/f2cf5956-4ca0-485e-a7f7-27fa4897a4db");
+        message = "Got data";
     }
 
     void IncrementScore(String name)

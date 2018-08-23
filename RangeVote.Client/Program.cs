@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Blazor.Hosting;
 
-namespace RangeVote
+namespace RangeVote.Client
 {
     public class Program
     {

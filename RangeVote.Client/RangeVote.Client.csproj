@@ -17,10 +17,4 @@
     <ProjectReference Include="..\RangeVote.Common\RangeVote.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Update="Pages\Vote.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-  </ItemGroup>
-
 </Project>
