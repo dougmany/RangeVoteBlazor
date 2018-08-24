@@ -8,7 +8,7 @@ namespace RangeVote.Server.Data
 {
     public interface IRepository
     {
-        IEnumerable<Candidate> GetCandidate(Guid id);
-        void PutCandidate(Guid id, IEnumerable<Candidate> candidate);
+        Ballot GetBallot(Guid id);
+        void PutBallot(Ballot ballot);
     }
 }

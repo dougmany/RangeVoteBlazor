@@ -2,9 +2,6 @@
 using RangeVote.Server.Data;
 using RangeVote.Common;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RangeVote.Server.Controllers
 {
@@ -21,18 +18,18 @@ namespace RangeVote.Server.Controllers
             _repository = repository;
         }
 
-        // GET api/values/5
+        // GET api/Candidate/5
         [HttpGet("{id}")]
-        public Candidate[] Get(Guid id)
+        public Ballot Get(Guid id)
         {
-            return _repository.GetCandidate(id).ToArray();
+            return _repository.GetBallot(id);
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(Guid id, [FromBody] IEnumerable<Candidate> candidate)
+        // PUT api/Candidate/
+        [HttpPut]
+        public void Put(Ballot ballot)
         {
-            _repository.PutCandidate(id, candidate);
+            _repository.PutBallot(ballot);
         }
     }
 }

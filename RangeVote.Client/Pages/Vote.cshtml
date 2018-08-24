@@ -21,16 +21,20 @@ else
             <th>Score</th>
         </tr>
     </thead>
+    <tfoot>
+        <button class="btn btn-primary" onclick="@(e => SaveScores())">Save</button>
+    </tfoot>
     <tbody>
-        @foreach (var trip in trips.OrderByDescending(t=>t.Score))
-            {
-        <tr>
-            <td>@trip.Name</td>
-            <td><button class="btn btn-primary" onclick="@(e => DecrementScore(@trip.Name))">-</button> <button class="btn" onclick="@(e => DecrementScorePt(@trip.Name))">-</button> @trip.Score.ToString("N1") <button class="btn" onclick="@(e => IncrementScorePt(@trip.Name))">+</button> <button class="btn btn-primary" onclick="@(e => IncrementScore(@trip.Name))">+</button></td>
-        </tr>
-            }
+        @foreach (var trip in trips.OrderByDescending(t => t.Score))
+        {
+            <tr>
+                <td>@trip.Name</td>
+                <td><button class="btn btn-primary" onclick="@(e => DecrementScore(@trip.Name))">-</button> <button class="btn" onclick="@(e => DecrementScorePt(@trip.Name))">-</button> @trip.Score.ToString("N1") <button class="btn" onclick="@(e => IncrementScorePt(@trip.Name))">+</button> <button class="btn btn-primary" onclick="@(e => IncrementScore(@trip.Name))">+</button></td>
+            </tr>
+        }
     </tbody>
 </table>
+<p>@message</p>
 }
 
 @functions {
@@ -39,10 +43,7 @@ else
 
     protected override async Task OnInitAsync()
     {
-        //trips = await Http.GetJsonAsync<Candidate[]>("sample-data/trips.json");
-        message = "About to get data";
-        trips = await Http.GetJsonAsync<Candidate[]>("/api/candidate/f2cf5956-4ca0-485e-a7f7-27fa4897a4db");
-        message = "Got data";
+        trips = (await Http.GetJsonAsync<Ballot>("/api/candidate/f2cf5956-4ca0-485e-a7f7-27fa4897a4db")).Candidates;
     }
 
     void IncrementScore(String name)
@@ -88,8 +89,22 @@ else
         {
             if (trip.Score > 0)
             {
-                trip.Score-= .1;
+                trip.Score -= .1;
             }
+        }
+    }
+
+    async Task SaveScores()
+    {
+        {
+            message = "Saving...";
+
+            foreach (var item in trips)
+            {
+                message += $"{item.Name}: {item.Score}";
+            }
+            await Http.SendJsonAsync(HttpMethod.Put, "/api/candidate/", new Ballot { Id= Guid.Parse("f2cf5956-4ca0-485e-a7f7-27fa4897a4db"), Candidates = trips});
+            message += "OK";
         }
     }
 }

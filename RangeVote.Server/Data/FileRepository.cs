@@ -22,14 +22,14 @@ namespace RangeVote.Server.Data
             new Candidate{    Name =  "Nova Vallarta",    Score =  5  }
         };
 
-        public IEnumerable<Candidate> GetCandidate(Guid id)
+        public Ballot GetBallot(Guid id)
         {
-            return _candidates;
-        }
+            return new Ballot { Id = id, Candidates = _candidates.ToArray() };
+        } 
 
-        public void PutCandidate(Guid id, IEnumerable<Candidate> candidates)
+        public void PutBallot(Ballot ballot)
         {
-            _candidates = candidates.ToList();
+            _candidates = ballot.Candidates.ToList();
         }
     }
 }
