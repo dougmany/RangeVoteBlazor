@@ -22,6 +22,7 @@ else
         </tr>
     </thead>
     <tfoot>
+        <p>@message</p>
         <button class="btn btn-primary" onclick="@(e => SaveScores())">Save</button>
     </tfoot>
     <tbody>
@@ -34,7 +35,7 @@ else
         }
     </tbody>
 </table>
-<p>@message</p>
+
 }
 
 @functions {
@@ -98,13 +99,8 @@ else
     {
         {
             message = "Saving...";
-
-            foreach (var item in trips)
-            {
-                message += $"{item.Name}: {item.Score}";
-            }
             await Http.SendJsonAsync(HttpMethod.Put, "/api/candidate/", new Ballot { Id= Guid.Parse("f2cf5956-4ca0-485e-a7f7-27fa4897a4db"), Candidates = trips});
-            message += "OK";
+            message = "";
         }
     }
 }
