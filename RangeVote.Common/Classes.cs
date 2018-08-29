@@ -11,6 +11,14 @@ namespace RangeVote.Common
     public class Candidate
     {
         public String Name { get; set; }
-        public Double Score { get; set; }
+        public Int32 Score { get; set; }
+        public String ScoreString { get { return (Score / 10.0).ToString("N1"); } }
+    }
+
+    public class DBCandidate
+    {
+        public String Guid { get; set; }
+        public String Name { get; set; }
+        public Int32 Score { get; set; }
     }
 }

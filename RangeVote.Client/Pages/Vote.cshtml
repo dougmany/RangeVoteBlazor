@@ -30,7 +30,7 @@ else
         {
             <tr>
                 <td>@trip.Name</td>
-                <td><button class="btn btn-primary" onclick="@(e => DecrementScore(@trip.Name))">-</button> <button class="btn" onclick="@(e => DecrementScorePt(@trip.Name))">-</button> @trip.Score.ToString("N1") <button class="btn" onclick="@(e => IncrementScorePt(@trip.Name))">+</button> <button class="btn btn-primary" onclick="@(e => IncrementScore(@trip.Name))">+</button></td>
+                <td><button class="btn btn-primary" onclick="@(e => DecrementScore(@trip.Name))">-</button> <button class="btn" onclick="@(e => DecrementScorePt(@trip.Name))">-</button> @trip.ScoreString <button class="btn" onclick="@(e => IncrementScorePt(@trip.Name))">+</button> <button class="btn btn-primary" onclick="@(e => IncrementScore(@trip.Name))">+</button></td>
             </tr>
         }
     </tbody>
@@ -52,9 +52,9 @@ else
         var trip = trips.Where(t => t.Name == name).FirstOrDefault();
         if (trip != null)
         {
-            if (trip.Score < 9)
+            if (trip.Score < 90)
             {
-                trip.Score++;
+                trip.Score += 10;
             }
         }
     }
@@ -64,9 +64,9 @@ else
         var trip = trips.Where(t => t.Name == name).FirstOrDefault();
         if (trip != null)
         {
-            if (trip.Score < 9.8)
+            if (trip.Score < 99)
             {
-                trip.Score += .1;
+                trip.Score ++;
             }
         }
     }
@@ -76,9 +76,13 @@ else
         var trip = trips.Where(t => t.Name == name).FirstOrDefault();
         if (trip != null)
         {
-            if (trip.Score > 0)
+            if (trip.Score > 10)
             {
-                trip.Score--;
+                trip.Score -= 10;
+            }
+            else if (trip.Score <= 10)
+            {
+                trip.Score = 0;
             }
         }
     }
@@ -90,7 +94,7 @@ else
         {
             if (trip.Score > 0)
             {
-                trip.Score -= .1;
+                trip.Score--;
             }
         }
     }

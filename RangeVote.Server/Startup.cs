@@ -26,7 +26,7 @@ namespace RangeVote.Server
         {
             services.AddMvc();
 
-            services.AddSingleton<IRepository, FileRepository>();
+            services.AddSingleton<IRepository, DatabaseRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
