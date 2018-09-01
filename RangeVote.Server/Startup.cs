@@ -27,6 +27,10 @@ namespace RangeVote.Server
             services.AddMvc();
 
             services.AddSingleton<IRepository, DatabaseRepository>();
+
+            services.Configure<ConfigData>(config =>
+               config.ConnectionString = Configuration.GetConnectionString("DefaultConnection")
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

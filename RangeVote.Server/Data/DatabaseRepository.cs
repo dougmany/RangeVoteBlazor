@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Dapper;
+using Microsoft.Extensions.Options;
 using MySql.Data.MySqlClient;
 using RangeVote.Common;
 
@@ -9,18 +10,23 @@ namespace RangeVote.Server.Data
 {
     public class DatabaseRepository : IRepository
     {
-        private static MySqlConnection GetMySqlConnection()
+        private readonly ConfigData _config;
+        private static MySqlConnection _sqlConnection;
+
+        public DatabaseRepository(IOptions<ConfigData> config)
         {
-            var connectionString = new MySqlConnectionStringBuilder("Server=localhost;Database=rangevote;Uid=rangevote;Pwd=3fd29g24g;SslMode=none");
+            _config = config.Value;
+
+            var connectionString = new MySqlConnectionStringBuilder(_config.ConnectionString);
 
             var connection = new MySqlConnection(connectionString.ConnectionString);
             connection.Open();
-            return connection;
+            _sqlConnection = connection;
         }
 
         public Ballot GetBallot(Guid guid)
         {
-            using (var conn = GetMySqlConnection())
+            using (var conn = _sqlConnection)
             {
                 Ballot ballot = new Ballot { Id = guid };
                 ballot.Candidates = conn.Query<Candidate>("SELECT * FROM candidate WHERE Guid = @guid;", new { guid = guid }).ToArray();
@@ -34,7 +40,7 @@ namespace RangeVote.Server.Data
 
         public void PutBallot(Ballot ballot)
         {
-            using (var conn = GetMySqlConnection())
+            using (var conn = _sqlConnection)
             {
                 conn.Execute(@"DELETE FROM candidate WHERE Guid = @guid;", new { guid = ballot.Id });
 
@@ -59,5 +65,10 @@ namespace RangeVote.Server.Data
             new Candidate{ Name = "Cancun",    Score =  50  },
             new Candidate{ Name = "Nova Vallarta",    Score =  50  }
         };
+    }
+
+    public class ConfigData
+    {
+        public String ConnectionString { get; set; }
     }
 }
