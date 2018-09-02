@@ -1,7 +1,122 @@
-﻿@page "/"
+﻿@page "/{userID}"
 
-<h1>Hello!</h1>
+@using RangeVote.Common
+@inject HttpClient Http
+@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper UriHelper
 
-<p>Welcome to my voting application.</p>
+<p>@message</p>
 
-<p>This is a <a href="https://en.wikipedia.org/wiki/Score_voting">Score Voting system</a>.  It is similar to the Olympics in that every trip will be given a score from 0 to 9.9.  It is recommended to give your favorite choice a 9.9 and your lease favorite a 0.</p>
+@if (trips == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h1>Trip Vote</h1>
+
+    <P>Rows will sort themselves as you click.</P>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <p>@message</p>
+            <button class="btn btn-primary" onclick="@(e => SaveScores())">Save</button>
+        </tfoot>
+        <tbody>
+            @foreach (var trip in trips.OrderByDescending(t => t.Score))
+            {
+                <tr>
+                    <td>@trip.Name</td>
+                    <td><button class="btn btn-primary" onclick="@(e => DecrementScore(@trip.Name))">-</button> <button class="btn" onclick="@(e => DecrementScorePt(@trip.Name))">-</button> @trip.ScoreString <button class="btn" onclick="@(e => IncrementScorePt(@trip.Name))">+</button> <button class="btn btn-primary" onclick="@(e => IncrementScore(@trip.Name))">+</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+@functions {
+
+[Parameter]
+private String UserID { get; set; }
+
+
+Candidate[] trips;
+String message;
+
+protected override async Task OnInitAsync()
+{
+    await GetTrips();
+}
+
+async Task GetTrips()
+{
+    trips = (await Http.GetJsonAsync<Ballot>($"/api/candidate/{UserID}")).Candidates;
+}
+
+void IncrementScore(String name)
+{
+    var trip = trips.Where(t => t.Name == name).FirstOrDefault();
+    if (trip != null)
+    {
+        if (trip.Score < 90)
+        {
+            trip.Score += 10;
+        }
+    }
+}
+
+void IncrementScorePt(String name)
+{
+    var trip = trips.Where(t => t.Name == name).FirstOrDefault();
+    if (trip != null)
+    {
+        if (trip.Score < 99)
+        {
+            trip.Score++;
+        }
+    }
+}
+
+void DecrementScore(String name)
+{
+    var trip = trips.Where(t => t.Name == name).FirstOrDefault();
+    if (trip != null)
+    {
+        if (trip.Score > 10)
+        {
+            trip.Score -= 10;
+        }
+        else if (trip.Score <= 10)
+        {
+            trip.Score = 0;
+        }
+    }
+}
+
+void DecrementScorePt(String name)
+{
+    var trip = trips.Where(t => t.Name == name).FirstOrDefault();
+    if (trip != null)
+    {
+        if (trip.Score > 0)
+        {
+            trip.Score--;
+        }
+    }
+}
+
+async Task SaveScores()
+{
+    {
+        message = "Saving...";
+        await Http.SendJsonAsync(HttpMethod.Put, "/api/candidate/", new Ballot { Id = Guid.Parse(UserID), Candidates = trips });
+        message = "";
+    }
+}
+}
