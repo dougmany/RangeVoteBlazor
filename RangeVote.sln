@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RangeVote.Common", "RangeVo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RangeVote.Server", "RangeVote.Server\RangeVote.Server.csproj", "{9DC1F448-DAEA-420E-AE12-0D659818702D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RangeVote.Client", "RangeVote.Client\RangeVote.Client.csproj", "{23B95FD7-D357-4550-B60F-03B3C86B5C7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RangeVote.Client", "RangeVote.Client\RangeVote.Client.csproj", "{23B95FD7-D357-4550-B60F-03B3C86B5C7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,8 +23,8 @@ Global
 		{9DC1F448-DAEA-420E-AE12-0D659818702D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DC1F448-DAEA-420E-AE12-0D659818702D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DC1F448-DAEA-420E-AE12-0D659818702D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{23B95FD7-D357-4550-B60F-03B3C86B5C7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{23B95FD7-D357-4550-B60F-03B3C86B5C7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23B95FD7-D357-4550-B60F-03B3C86B5C7A}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{23B95FD7-D357-4550-B60F-03B3C86B5C7A}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{23B95FD7-D357-4550-B60F-03B3C86B5C7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23B95FD7-D357-4550-B60F-03B3C86B5C7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection

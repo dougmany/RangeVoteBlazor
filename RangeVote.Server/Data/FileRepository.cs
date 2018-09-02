@@ -25,7 +25,12 @@ namespace RangeVote.Server.Data
         public Ballot GetBallot(Guid id)
         {
             return new Ballot { Id = id, Candidates = _candidates.ToArray() };
-        } 
+        }
+
+        public Ballot GetResult()
+        {
+            throw new NotImplementedException();
+        }
 
         public void PutBallot(Ballot ballot)
         {

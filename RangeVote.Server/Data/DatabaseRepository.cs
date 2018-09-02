@@ -51,6 +51,20 @@ namespace RangeVote.Server.Data
             }
         }
 
+        public Ballot GetResult()
+        {
+            using (var conn = _sqlConnection)
+            {
+                Ballot ballot = new Ballot { };
+                ballot.Candidates = conn.Query<Candidate>("SELECT Name, SUM(Score) AS Score FROM candidate GROUP BY Name;").ToArray();
+                if (ballot.Candidates.Count() > 0)
+                {
+                    return ballot;
+                }
+            }
+            return new Ballot { Candidates = DefaultCandidates };
+        }
+
         private Candidate[] DefaultCandidates = new Candidate[]
         {
             new Candidate{ Name = "Alaska", Score = 50 },
