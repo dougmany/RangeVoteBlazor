@@ -5,8 +5,6 @@ using System;
 
 namespace RangeVote.Server.Controllers
 {
-
-
     [Route("api/[controller]")]
     [ApiController]
     public class ResultController : ControllerBase
