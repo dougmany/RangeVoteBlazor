@@ -55,7 +55,7 @@ namespace RangeVote.Server.Data
             using (var conn = _sqlConnection)
             {
                 Ballot ballot = new Ballot { };
-                ballot.Candidates = conn.Query<Candidate>("SELECT Name, SUM(Score) AS Score FROM candidate GROUP BY Name;").ToArray();
+                ballot.Candidates = conn.Query<Candidate>("SELECT Name, SUM(Score) AS Score FROM candidate GROUP BY Name ORDER BY SUM(Score) DESC;").ToArray();
                 if (ballot.Candidates.Count() > 0)
                 {
                     return ballot;
