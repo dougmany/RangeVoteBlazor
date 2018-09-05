@@ -8,5 +8,6 @@ namespace RangeVote.Server.Data
         Ballot GetBallot(Guid id);
         void PutBallot(Ballot ballot);
         Ballot GetResult();
+        Int32 GetVoters();
     }
 }

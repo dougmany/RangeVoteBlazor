@@ -32,6 +32,11 @@ namespace RangeVote.Server.Data
             throw new NotImplementedException();
         }
 
+        public int GetVoters()
+        {
+            throw new NotImplementedException();
+        }
+
         public void PutBallot(Ballot ballot)
         {
             _candidates = ballot.Candidates.ToList();

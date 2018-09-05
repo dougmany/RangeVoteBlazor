@@ -64,6 +64,15 @@ namespace RangeVote.Server.Data
             return new Ballot { Candidates = DefaultCandidates };
         }
 
+        public int GetVoters()
+        {
+            var query = "SELECT COUNT(DISTINCT Guid) FROM candidate";
+            using (var conn = _sqlConnection)
+            {
+                return conn.QuerySingle<Int32>(query);
+            }
+        }
+
         private Candidate[] DefaultCandidates = new Candidate[]
         {
             new Candidate{ Name = "Alaska", Score = 50 },
