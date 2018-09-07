@@ -18,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Pages\Result.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Pages\IndexNoUser.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

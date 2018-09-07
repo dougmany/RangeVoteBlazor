@@ -55,7 +55,12 @@ namespace RangeVote.Server.Data
             using (var conn = _sqlConnection)
             {
                 Ballot ballot = new Ballot { };
-                ballot.Candidates = conn.Query<Candidate>("SELECT Name, SUM(Score) AS Score FROM candidate GROUP BY Name ORDER BY SUM(Score) DESC;").ToArray();
+                ballot.Candidates = conn.Query<Candidate>(
+                    @"SELECT Name, CAST(ROUND(SUM(Score)/COUNT(DISTINCT Guid))AS SIGNED) AS Score 
+                    FROM candidate 
+                    GROUP BY Name 
+                    ORDER BY SUM(Score) DESC;"
+                ).ToArray();
                 if (ballot.Candidates.Count() > 0)
                 {
                     return ballot;
@@ -69,7 +74,7 @@ namespace RangeVote.Server.Data
             var query = "SELECT COUNT(DISTINCT Guid) FROM candidate";
             using (var conn = _sqlConnection)
             {
-                return conn.QuerySingle<Int32>(query);
+                return conn.Query<Int32>(query).FirstOrDefault();
             }
         }
 
