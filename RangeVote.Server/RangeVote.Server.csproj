@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,10 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="1.50.5" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="0.5.1" />
-    <PackageReference Include="MySql.Data" Version="8.0.12" />
+    <PackageReference Include="Dapper" Version="1.60.6" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.12" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="0.7.0" />
+    <PackageReference Include="MySql.Data" Version="8.0.17" />
   </ItemGroup>
 
   <ItemGroup>
