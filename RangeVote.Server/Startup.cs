@@ -23,8 +23,10 @@ namespace RangeVote.Server
             services.AddSingleton<IRepository, DatabaseRepository>();
 
             services.Configure<ConfigData>(config =>
-               config.ConnectionString = Configuration.GetConnectionString("DefaultConnection")
-            );
+            {
+                config.ConnectionString = Configuration.GetConnectionString("DefaultConnection");
+                config.ElectionID = Configuration.GetSection("ElectionSettings")["ElectionID"];
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

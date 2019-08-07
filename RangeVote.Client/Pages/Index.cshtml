@@ -20,7 +20,7 @@ else
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Score</th>
+                <th style="width:200px;">Score</th>
             </tr>
         </thead>
         <tfoot>
@@ -31,7 +31,7 @@ else
             @foreach (var trip in trips.OrderByDescending(t => t.Score))
             {
                 <tr>
-                    <td>@trip.Name</td>
+                    <td><h4>@trip.Name</h4>@trip.Description</td>
                     <td><button class="btn btn-primary" onclick="@(e => DecrementScore(@trip.Name))">-</button> <button class="btn" onclick="@(e => DecrementScorePt(@trip.Name))">-</button> @trip.ScoreString <button class="btn" onclick="@(e => IncrementScorePt(@trip.Name))">+</button> <button class="btn btn-primary" onclick="@(e => IncrementScore(@trip.Name))">+</button></td>
                 </tr>
             }
