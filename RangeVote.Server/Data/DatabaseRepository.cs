@@ -64,7 +64,7 @@ namespace RangeVote.Server.Data
                 new Candidate
                 {
                     Name = "Glacier National Park",
-                    Description = "Stay in the Glacier Park Lodge, Take the train here from Portland or Seattle, non stop flights from Oakland to Glacier are available.",
+                    Description = "Stay in the Glacier Park Lodge, pristine forests, alpine meadows, rugged mountains, and spectacular lakes.  Take the train here from Portland or Seattle, fly back to from Oakland.",
                     Score = 50,
                     ElectionID = _config.ElectionID
                 },
@@ -78,7 +78,7 @@ namespace RangeVote.Server.Data
                 new Candidate
                 {
                     Name = "Washington DC",
-                    Description = "Museams, Monuments, Government",
+                    Description = "Museums, Monuments, Government",
                     Score = 50,
                     ElectionID = _config.ElectionID
                 },
