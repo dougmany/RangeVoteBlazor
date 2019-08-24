@@ -97,6 +97,52 @@ namespace RangeVote.Server.Data
                     ElectionID = _config.ElectionID
                 }
             };
+
+            DefaultCandidates = new Candidate[]
+            {
+                new Candidate
+                {
+                    Name = "Denali National Park",
+                    Description = "6 million acres, one road, shuttle bus only. All visitors to Denali wishing to venture past Mile 15 into the heart of the park must ride a bus to Toklat River, Eielson Visitor Center, Wonder Lake, or Kantishna",
+                    Score = 50,
+                    ElectionID = _config.ElectionID
+                },
+                new Candidate
+                {
+                    Name = "Katmai National Park",
+                    Description = "Fly to Kodiak Island from Anchorage by float plane to stay in all inclusive wilderness cabin.  Alternatively, we can stay on Kodiak Island exploring the island hiking, tide-pooling, history, or taking boat tours from there and staying at a local hotel. The Kodiak Wildlife Refuge.  Gray Whales seasonally feeding right offshore of 'Surfer's Beach, and there is the scenic adjacent 'Fossil Beach as well, beautiful interior mountains where you might have a chance to see bear early morning or late evening when a salmon run is not engaging bear at visible river sites. Wonderful rain forest interiors and ocean vistas (bring your binoculars). Birds and hiking trails.",
+                    Score = 50,
+                    ElectionID = _config.ElectionID
+                },
+                new Candidate
+                {
+                    Name = "Kenai National Park",
+                    Description = "At the edge of the Kenai Peninsula lies a land where the ice age lingers. Nearly 40 glaciers flow from the Harding Icefield, Kenai Fjords' crowning feature. Wildlife thrives in icy waters and lush forests around this vast expanse of ice. Sugpiaq people relied on these resources to nurture a life entwined with the sea.  3.5 hours by train from Anchorage(great scenic train ride- includes a glacier).  In Seward, Stay in Harborside hotel with pool or Best Western hotel by the Marine Mammal Center. Town is almost walkable with shuttles around town and to Exit Glacier. Kinda like a little Lahaina with glaciers.  There are many glaciers here to hike around or on, and go on a boat tour to see tidewater glaciers. There are tons of Marine mammals including orca, humpbacks, otters, sea lions, etc. There is a Marine Center with a great display. Many day boat tours to view the park.",
+                    Score = 50,
+                    ElectionID = _config.ElectionID
+                },
+                new Candidate
+                {
+                    Name = "Poipu (South point of island)",
+                    Description = "Poipu Beach in front has gentle waves and and clear water -- perfect for snorkeling or learning to surf.  Hyatt: top hotel with amazing pool, Kiahuna Plantation Resort OR Castle Kiahuna Plantation Beach Bungalows: Outrigger -cheaper, good pool with one water slide. The condos are large, if not luxe (no AC, unpredictable decor). Some say there is a pool, though small, has a waterslide and kiddie area. Others say no pool. Condos are spread out over grassy area.",
+                    Score = 50,
+                    ElectionID = _config.ElectionID
+                },
+                new Candidate
+                {
+                    Name = "Princeville (North point of island)",
+                    Description = "Beautiful resort area with views and walking trails. Near Hanalei town - good spot.  Westin: top hotel with amazing pool - suites all have washers and dryers as well as kitchens with dishwashers, stovetops, and microwaves. The resort's four pools include a kids' pool. The beach, however, is a 10-minute walk down a steep path.",
+                    Score = 50,
+                    ElectionID = _config.ElectionID
+                },
+                new Candidate
+                {
+                    Name = "Kaapa (East side of island)",
+                    Description = "Close to the airport. Narrow beach, not sure about the snorkeling, may be ok.  Waipouli Beach Resort - Outrigger: nice with good pool and waterslides",
+                    Score = 50,
+                    ElectionID = _config.ElectionID
+                }
+            };
         }
 
         public Ballot GetBallot(Guid guid)
